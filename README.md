@@ -32,13 +32,11 @@ To install the project use any terminal interface to run these commands :
     ├── App.js # root app component and the routing system 
   
     ├── BooksAPI.js # inherited API file from the main repo
-
-    ├── components # directory that contains the main components from the app
-        --Book.js # component that contains that renders the book imagee,name,authors and includes a shelf component instance to manipulate it state
-        -- BookDetails.js # component that renders a couple of extra details from a given book, and is possible to preview it from the link gave by the api and update its shelf status
-        --BookList.js # renders the home page where it contains 3 shelves (currently reading,want to read and read) that the user is able to update a book by using selectbook component or a drag/drop event
-        --Searchbar.js # /search route view that the user can query for books by an input text. It is possible to see the details or update it shelf status.Using lodash, the books are oredered according with its averageRating rank and after by its alphabetical ascending order
-        --SelectBook.js # selector component to update the state from a single book
+    ├── Actions # Folder containing all the actions from the application, using redux saga approach for async data
+    ├── components # Folder containg all the specifics components from the application
+    ├── reducers # all the reducers (active post, posts, categories and comments) from redux part
+    ├── middleware # saga and logger used as middlewares
+    ├── utils # includes all the request generator to communicate with the API
 
 ```
 
@@ -46,10 +44,13 @@ Others ommited files are similar or very equal to the main [repo](https://github
 
 ## Dependencies
 
-To improve the UX,validations and javascript operation functions it is used in this project:
+To improve the UX,validations,logging,state management and javascript operation functions it is used in this project:
 
 * [`Tachyons`](http://tachyons.io/docs/)
 * [`lodash`](https://lodash.com/docs/4.17.10)
+* [`Redux Saga`](https://redux-saga.js.org/)
+* [`Redux`](https://redux.js.org/)
+* [`Redux Logger`](https://github.com/LogRocket/redux-logger)
 
 
 
