@@ -13,8 +13,12 @@ to develop an React application to display a Reddit Post alike to see posts, com
 It is required that you have already installed [npm](https://www.npmjs.com/get-npm).
 
 This project uses the server from the repo from [Readable Server](https://github.com/udacity/reactnd-project-readable-starter).
-
-To install the project use any terminal interface to run these commands :
+To install and run the server:
+* `git clone https://github.com/udacity/reactnd-project-readable-starter.git`
+* `cd api-server`
+* `npm i`
+* `node server`
+To install the project use another terminal interface to run these commands :
 * `git clone https://github.com/gtyamamoto/readableIUdacity.git`
 * `cd ./reactnd-project-myreads-starter`
 * `npm install`

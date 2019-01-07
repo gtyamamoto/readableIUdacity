@@ -112,12 +112,12 @@ export const votePost = async (id,option)=>{
 }
 
 //change post
-export const updatePost = async (id,title,body)=>{
+export const updatePost = async (id,title,body,category,author)=>{
   try {
     const fetchPutPost = await fetch(`${BASE_API_URL}/posts/${id}`,{
       ...REQUIRED_HEADERS,
       method:'PUT',
-      body:JSON.stringify({title,body})
+      body:JSON.stringify({title,body,category,author})
     });
     return await fetchPutPost.json();
   } catch (error) {

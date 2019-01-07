@@ -18,9 +18,10 @@ export default function posts(state={},action){
         }
         case GET_POST:
         let {post} = action;
-        delete state[post.id]
+        const newState = { ...state }
+        delete newState[post.id]
         return {
-        ...state,
+        ...newState,
          ...keyBy([post],'id')
 
         }

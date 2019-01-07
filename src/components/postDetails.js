@@ -9,8 +9,9 @@ class PostDetails extends Component{
   
  
    componentDidMount(){
-    const {id} = this.props.match.params;
-    this.props.dispatch({type:GET_POST_REQUEST,id})
+    const {postId} = this.props.match.params;
+    const {getPost} = this.props;
+    getPost(postId)
    }
    
 //component to render a specific post
@@ -43,5 +44,12 @@ function mapStateToProps({activePost}){
        activePost
     }
 }
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        getPost : (id)=>{
+            dispatch({type:GET_POST_REQUEST,id})
+        }
+    }
+}
 
-export default connect(mapStateToProps)(PostDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(PostDetails);

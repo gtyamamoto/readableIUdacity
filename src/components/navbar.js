@@ -15,7 +15,7 @@ export default props => {
         
         <div class="hide-child absolute   white dib">Categories
     <div class="child absolute  mt1">
-        {categories.map(category=> <NavLink to={`/category/${category}`} className="link white db bg-black-90 pv2 pr2">
+        {categories.map(category=> <NavLink to={`/${category}`} className="link white db bg-black-90 pv2 pr2">
             {category}
 
           </NavLink>)}

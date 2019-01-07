@@ -15,11 +15,11 @@ class Main extends Component{
      })
    }
    componentDidMount(){
-       let {id} = this.props.match.params;
-       if(id){
-           this.props.dispatch({type:'GET_POSTS_BY_CAT',categoryID:id})
+       let {categoryId} = this.props.match.params;
+       if(categoryId){
+           this.props.getPostsByCat(categoryId)
        }else{
-        this.props.dispatch({type:'GET_ALL_POSTS'})
+        this.props.getAllPosts()
        }
     
    }
@@ -48,14 +48,14 @@ class Main extends Component{
   render(){
       const {posts}  = this.props;
       const {filter} = this.state;
-      const {id} = this.props.match.params;
+      const {categoryId} = this.props.match.params;
        
       return (
           <div className="container">
 
                 <div className="posts tc pt7">
                     <h3>Posts </h3>
-                    {id && (<p><strong>Category</strong> : {id}</p>)}
+                    {categoryId && (<p><strong>Category</strong> : {categoryId}</p>)}
                      <select
                     onChange={this.handleSelectOrderPost} className="dib cf">
                     <option key="new" value="new">Newest</option>
@@ -84,5 +84,14 @@ function mapStateToProps({categories,posts}){
        posts:posts!=='no posts' ? _.values(posts) : []
     }
 }
-
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = dispatch => {
+    return {
+      getAllPosts: () => {
+        dispatch({type:'GET_ALL_POSTS'})
+      },
+      getPostsByCat: (categoryId)=>{
+        dispatch({type:'GET_POSTS_BY_CAT',categoryID:categoryId})
+      }
+    };
+  };
+export default connect(mapStateToProps,mapDispatchToProps)(Main);

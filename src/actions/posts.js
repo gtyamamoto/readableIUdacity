@@ -44,8 +44,8 @@ export function* DeletePost({id}){
   else
   yield put ({type:DELETE_POST,id:id})
 }
-export function* UpdatePost({id,title,body}){
-  let response = yield call(updatePost,id,title,body);
+export function* UpdatePost({id,title,body,category,author}){
+  let response = yield call(updatePost,id,title,body,category,author);
   yield put({type:GET_POST,post:response})
 }
 

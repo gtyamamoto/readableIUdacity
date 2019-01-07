@@ -24,25 +24,22 @@ class Comment extends Component {
 
   handleDelete = e => {
     const { id } = this.props.comment;
-    this.props.dispatch({ type: DELETE_COMMENT_REQUEST, id });
+    this.props.deleteComment( id);
   };
   handleVoteComment = e => {
     const { id } = this.props.comment;
 
-    this.props.dispatch({
-      type: VOTE_COMMENT,
-      id,
-      option: e.target.getAttribute("typevote")
-    });
+    this.props.voteComment(
+      id,e.target.getAttribute("typevote")
+    );
   };
   updateComment = e => {
     const { id } = this.props.comment;
 
-    this.props.dispatch({
-      type: UPDATE_COMMENT_REQUEST,
+    this.props.updateComment(
       id,
-      body: this.state.text
-    });
+  this.state.text
+    );
     this.setState(() => ({
       editable: false
     }));
@@ -93,5 +90,17 @@ class Comment extends Component {
     );
   }
 }
-
-export default connect()(Comment);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateComment: (id,body) => {
+      dispatch({type:UPDATE_COMMENT_REQUEST,id,body})
+    },
+    voteComment: (id,option)=>{
+      dispatch({type:VOTE_COMMENT,id,option})
+    },
+    deleteComment :(id)=>{
+      dispatch({type:DELETE_COMMENT_REQUEST,id})
+    }
+  };
+}
+export default connect(null,mapDispatchToProps)(Comment);

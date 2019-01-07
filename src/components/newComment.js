@@ -32,10 +32,10 @@ class newComment extends Component{
         if(!this.state.author) return alert('Author Cant be Empty')
         if(!this.state.body) return alert('Body of comment cant be empty')
         const {body,author} = this.state;
-        const {parentID} = this.props;
+        const {parentID,createComment} = this.props;
         
-        this.props.dispatch({type:POST_COMMENT_REQUEST,body,author,parentID
-        })
+       createComment(body,author,parentID
+        )
       }
     render(){
         let {author,body} = this.state;
@@ -79,5 +79,13 @@ function mapStateToProps({activePost}){
         parentID:activePost.id
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+      createComment: (body,author,parentID) => {
+        dispatch({type:POST_COMMENT_REQUEST,body,author,parentID})
+      },
+    
+    };
+  };
 
-export default connect(mapStateToProps)(newComment)
+export default connect(mapStateToProps,mapDispatchToProps)(newComment)

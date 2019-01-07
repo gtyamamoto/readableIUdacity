@@ -18,19 +18,19 @@ class Post extends Component{
    
    handleDelete = (e)=>{
          const {id} = this.props.post;
-         this.props.dispatch({type:DELETE_POST_REQUEST,id})
+         this.props.deletePost(id)
          this.props.history.push(`/`)
 
    }
    handleVotePost = (e)=>{
-      const {id} = this.props.activePost;
+      const id = e.target.getAttribute('post-id');
       
-      this.props.dispatch({type:VOTE_POST,id,option:e.target.id})
+      this.props.votePost(id,e.target.id)
    }
    componentDidMount(){
       const {editable} = this.props;
-      const {id} = this.props.match.params;
-      if(editable) this.props.dispatch({type:GET_COMMENTS_REQUEST,id:id})
+      const {postId} = this.props.match.params;
+      if(editable) this.props.getComments(postId)
 
    }
    
@@ -44,16 +44,17 @@ class Post extends Component{
          <p className="post-date">{new Date(post.timestamp).toUTCString()}</p>
          <p className="post-content">{post.body}</p>
          <h5>Votescore : {post.voteScore}</h5>
-         
-         {!editable ? (<NavLink to={`/post/${post.id}`}>View Post</NavLink>) : (<div>
+         <h5>Comments : {post.commentCount}</h5>
+         <ul className="list">
+            <li id="upVote" post-id={post.id} class="dib ba pa2" onClick={this.handleVotePost}>UpVote</li>
+              <li  id="downVote" post-id={post.id} class="dib ml4 ba pa2" onClick={this.handleVotePost}>DownVote</li>
+         {!editable ? (<NavLink to={`/${post.category}/${post.id}`}>View Post</NavLink>) : (<div>
             
-            <ul className="list">
-            <li id="upVote" class="dib ba pa2" onClick={this.handleVotePost}>UpVote</li>
-              <li  id="downVote" class="dib ml4 ba pa2" onClick={this.handleVotePost}>DownVote</li>
+           
               <li  class="link" onClick={this.handleDelete}>Delete</li>
               <li><NavLink to={`/edit/post/${post.id}`}>Edit</NavLink></li>
               
-         </ul>
+        
          <CommentForm />
          
          <h3>Comments</h3>
@@ -67,6 +68,7 @@ class Post extends Component{
          </div>
         )
    }
+    </ul>
    </div>
    )
   
@@ -79,5 +81,18 @@ function mapStateToProps({comments,activePost}){
       activePost
    }
 }
+const mapDispatchToProps = dispatch => {
+   return {
+     getComments: (id) => {
+       dispatch({type:GET_COMMENTS_REQUEST,id})
+     },
+     votePost: (id,option)=>{
+       dispatch({type:VOTE_POST,id,option})
+     },
+     deletePost :(id)=>{
+        dispatch({type:DELETE_POST_REQUEST,id})
+     }
+   };
+ };
 
-export default withRouter(connect(mapStateToProps)(Post));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Post));

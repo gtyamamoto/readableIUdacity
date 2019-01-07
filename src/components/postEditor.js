@@ -16,16 +16,16 @@ class PostEditor extends Component{
         })
   }
   postHandle =  ()=>{
-      const {post} = this.props;
+      const {post,updatePost,addPost} = this.props;
       const {body,title,category,author} = this.state;
       //when post exists, it will update a post, so it will redirect to the post page otherwise it will redirect to the category of the created post
         if(post){
-            this.props.dispatch({type:UPDATE_POST_REQUEST,id:post.id,body,title})
+            updatePost(post.id,body,title,category,author)
             this.props.history.push(`/post/${post.id}`)
             
         }else{
-            this.props.dispatch({type:CREATE_POST_REQUEST,body,title,category,author})
-            this.props.history.push(`/category/${category}`)
+            addPost(body,title,category,author)
+            this.props.history.push(`/${category}`)
         }
 
 
@@ -55,17 +55,17 @@ handleBody = (e)=>{
            <div className="container">
           <div className="posts tc pt7">
             <h2>{post ? 'Edit Post' : 'New Post'}</h2>
-            <div class="post-form form ba pa4 mt2">
+            <div className="post-form form ba pa4 mt2">
             <div className=" db input-field">
-                  <label for="title" class="dib">Title:</label>
-                  <input id="title" type="text" class="input-reset"
+                  <label for="title" className="dib">Title:</label>
+                  <input id="title" type="text" className="input-reset"
                     value={title}
                     onChange={this.handleTitle}
                    
                   ></input>
                   </div>
                   <div className=" db input-field mt2">
-                  <label for="category" class="dib">Category:</label>
+                  <label for="category" className="dib">Category:</label>
                   <select id="category" 
                     value={category}
                     onChange={this.handleCategory}
@@ -76,15 +76,15 @@ handleBody = (e)=>{
                   <label for="author" class="dib">Author:</label>
                   <input id="author" type="text" class="input-reset"
                     value={author}
-                    defaultValue={author}
+                    
                    onChange = {this.handleAuthor}
                   ></input>
                   </div>
             <div className="db mt4 input-field">
-                  <label class="v-mid dib" for="bodyComment">Body:</label>
+                  <label className="v-mid dib" for="bodyComment">Body:</label>
                   <textarea id="bodyComment"
                   onChange={this.handleBody}
-                  type="text" class="v-mid input-reset"
+                  type="text" className="v-mid input-reset"
                     value={body}
                   />
                   </div>
@@ -109,4 +109,14 @@ function mapStateToProps ({categories,posts,activePost},props){
         post : id ? posts[id] : null
     }
 }
-export default withRouter(connect(mapStateToProps)(PostEditor));
+const mapDispatchToProps = dispatch => {
+    return {
+      updatePost: (id,body,title,category,author) => {
+        dispatch({type:UPDATE_POST_REQUEST,id,body,title,category,author})
+      },
+      addPost: (body,title,category,author)=>{
+        dispatch({type:CREATE_POST_REQUEST,body,title,category,author})
+      }
+    };
+  };
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(PostEditor));

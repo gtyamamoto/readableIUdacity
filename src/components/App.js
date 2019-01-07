@@ -19,7 +19,7 @@ class App extends Component {
   }
  
   render() {
-    const { loading, categories } = this.props;
+    const { loading, categories,posts } = this.props;
     return (
       <div>
       <BrowserRouter>
@@ -31,14 +31,23 @@ class App extends Component {
             <Navbar categories={categories}/>
             <Fragment>
                 <Route path="/" exact component={Main} />
+    
+                <Route path="/:categoryId/:postId" exact  render={(props)=>{
+                  let findPost = posts[props.match.params.postId]
+                  if(!findPost) return <ErrorPage />
+                  return <PostDetails {...props}/>
+                }} />
                
-                <Route path="/post/:id" component={PostDetails} />
-                <Route path="/new/post" exact component={PostEditor} />
                 <Route path="/edit/post/:id" component={PostEditor} />
-               
-                <Route path="/error" component={ErrorPage} />
-                <Route path="/category/:id" render={(props) => (
-  <Main key={props.match.params.id} {...props} />)
+                <Route exact path="/:categoryId"  render={(props) => {
+                  if(props.match.params.categoryId==='newpost')
+                  return (<PostEditor {...props}/>)
+                  if(props.match.params.categoryId==='error')
+                  return (<ErrorPage />)
+                  return (
+                    <Main key={props.match.params.categoryId} {...props} />)
+                }
+                 
 } />
                
               </Fragment>
@@ -58,6 +67,7 @@ function mapStateToProps({ categories,posts }) {
   
   return {
     // only will set loading to false when all the categories and posts are loaded
+    posts,
     loading: !categories || _.isEmpty(posts),
     categories
   };
