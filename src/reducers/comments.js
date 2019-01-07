@@ -3,6 +3,7 @@ import {GET_COMMENTS, DELETE_COMMENT, UPDATE_COMMENT, POST_COMMENT} from '../act
 import _ from 'lodash'
 export default function posts(state=[],action){
     let {comments,comment} = action;
+    //orderBy function sets all the comments to be ordered in descending way by its votescore
    switch(action.type){
        case GET_COMMENTS:
        

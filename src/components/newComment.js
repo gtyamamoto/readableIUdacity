@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { POST_COMMENT_REQUEST } from '../actions/comments';
 
 
-
+//component to create a new comment for a single post
 class newComment extends Component{
     state = {
         active : true,

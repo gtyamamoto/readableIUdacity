@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga'
 
 export const sagaMiddleware = createSagaMiddleware()
 
-// sagaMiddleware.run(saga)
+// export the needed middlewares
 export default applyMiddleware(
     sagaMiddleware,
     logger

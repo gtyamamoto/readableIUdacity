@@ -18,6 +18,7 @@ class PostEditor extends Component{
   postHandle =  ()=>{
       const {post} = this.props;
       const {body,title,category,author} = this.state;
+      //when post exists, it will update a post, so it will redirect to the post page otherwise it will redirect to the category of the created post
         if(post){
             this.props.dispatch({type:UPDATE_POST_REQUEST,id:post.id,body,title})
             this.props.history.push(`/post/${post.id}`)

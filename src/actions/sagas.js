@@ -6,7 +6,7 @@ import {all,takeEvery } from 'redux-saga/effects';
 import {GET_ALL_POSTS,GET_POSTS_BY_CAT,GET_POST_REQUEST,DELETE_POST_REQUEST,VOTE_POST} from './posts'
 import { GET_COMMENTS_REQUEST, getComments, VOTE_COMMENT, VoteComment, UPDATE_COMMENT_REQUEST, UpdateComment, DELETE_COMMENT_REQUEST, DeleteComment, POST_COMMENT_REQUEST, PostComment } from './comments';
 
-
+//root saga to run all the async actions
 
 export default function* rootSaga() {
     yield all([

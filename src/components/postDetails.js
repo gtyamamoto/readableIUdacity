@@ -13,7 +13,7 @@ class PostDetails extends Component{
     this.props.dispatch({type:GET_POST_REQUEST,id})
    }
    
-
+//component to render a specific post
  
   render(){
       const {activePost}  = this.props;

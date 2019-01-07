@@ -5,11 +5,11 @@ export default function posts(state={},action){
 
    switch(action.type){
        case GET_POST:
-       console.log('statess',state);
-       console.log(action.post)
+       //update the active post to the requested one
         return {
                  ...action.post
         }
+        //clear the active post
         case DELETE_POST:
         return {
 

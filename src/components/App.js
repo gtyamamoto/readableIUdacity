@@ -14,6 +14,7 @@ import PostEditor from "./postEditor";
 import AddPostBtn from './fixedButton'
 class App extends Component {
   componentDidMount() {
+    //fetch posts and categories from the api
     handleInitialData();
   }
  
@@ -54,8 +55,9 @@ class App extends Component {
 }
 
 function mapStateToProps({ categories,posts }) {
-  console.log(_.isEmpty(posts))
+  
   return {
+    // only will set loading to false when all the categories and posts are loaded
     loading: !categories || _.isEmpty(posts),
     categories
   };

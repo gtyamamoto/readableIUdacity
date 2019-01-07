@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import Post from './post';
 
-
+//component to fetch list of posts as the main page or for specific category
 class Main extends Component{
     state = {filter:'new'}
    handleViewPost = (e)=>{

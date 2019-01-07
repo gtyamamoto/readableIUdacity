@@ -5,8 +5,8 @@ export default function posts(state={},action){
 
    switch(action.type){
        case GET_POSTS:
-       console.log('statess',state);
-       console.log(action.posts)
+    
+       //structuring the posts as an object with all the posts,if the api does not returned a single post it will set to 'no posts'
         return action.posts && action.posts.length ? {
     
             ...keyBy(action.posts,'id')

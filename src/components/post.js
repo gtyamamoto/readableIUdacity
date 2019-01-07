@@ -35,6 +35,7 @@ class Post extends Component{
    }
    
    render(){
+      //editable will control if it will be editable post ( only in the specific page of a post) or just read only
       const {post,editable} =this.props;
       return (
          <div key={post.id} className="post ba bw3 mt3 pa3 db">
